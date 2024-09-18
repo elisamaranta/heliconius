@@ -326,6 +326,14 @@ echo "The 95th percentile value is: $percentile_value"
 
 ```
 
+### Getting functional annotation from reference genome
+
+```
+ grep "evm.model.Herato1001.120" Heliconius_erato_demophoon_v1_gene_name_only_model_sub_sort_Herato1001.fa.tsv | cut -c 1-200
+
+```
+
+
 
 
 
