@@ -10,7 +10,7 @@ disqus: hackmd
 
 
 
-We want to model the residuals for corneal area (CA) and facet count (FC) by transect position (or elevation; can compare). 
+We want to model the residuals for corneal area (CA) and facet count (FC) by transect position. 
 
 We use the HZAR  package in R and compare the fit for 5 different models using the R script Cline_analysis.R
 
