@@ -5,7 +5,7 @@ The code below is not runnable in its current state, as the size of VCF files wi
 
 ## Input
 
-VCFs for 666 individuals from Meier et al 2020
+VCFs for 479 individuals from Meier et al 2020
 
 For each species there are two important files (which can be found in ./1.data/association/) , which have as many rows as individuals in the sample: 
 
