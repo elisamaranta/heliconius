@@ -166,6 +166,66 @@ nice Rscript ../../../../scripts/perm.ranking.R  cov3.all.rows.lrtperm.txt erato
 
 
 ```
+### Analysing GWAS results
+We now have the ranked SNPs and can look at what proportion are in the top percent (1/201) and (2/201)
+We need to subset these top ranked SNPs as the outliers. Then we can begin plotting everything.
+
+```R
+#read in the data
+
+gwas_file <- "~/GWAS_project/erato_filtered.recode.gwas.shape.cov.lrt0.gz.50snp.10snp.pos.ranks"
+
+gwas <- read.table(gwas_file, header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+
+#look at the results
+str(gwas)
+
+hist(gwas$LRT.pval_median)
+```
+![BJq5wEQsR](https://github.com/user-attachments/assets/e54950ef-7a73-4cf7-aa3a-3aab3e7b7842)
+
+```
+qqnorm(gwas$LRT.pvalue_median)
+qqline(gwas$LRT.pvalue_median, col="red")
+
+ ggplot(gwas, aes(LRT.pval_median)) + 
+ stat_qq_band(aes(), alpha=2/10) +
+    stat_qq_line(aes()) +
+  stat_qq_point(aes(color=sex)) 
+```
+![image](https://github.com/user-attachments/assets/c5f29fa0-a5ab-49fe-a7d5-d5c42cfea7b9)
+
+We can calculate the inflation factor for the GWAS. The inflation factor (often referred to as λ) is a measure used in genome-wide association studies (GWAS) to assess the presence of population stratification or other systematic biases. This does not work on windows. 
+
+```R
+# Assuming 'pvalues' is your vector of p-values from GWAS results
+chi2 = qchisq(1 - pvalues, df = 1)  # Convert p-values to chi-squared statistics
+lambda = median(chi2) / qchisq(0.5, df = 1)  # Calculate the inflation factor
+print(lambda)
+[1] 0.948216
+```
+
+We can also plot the effect sizes (beta) along 10 SNP windows (non-overlapping)
+
+```R
+rank_file <- "~/GWAS_project/erato_filtered.recode.gwas.shape.cov.lrt0.gz.10snp.10snp.beta"
+gwas <- read.table(rank_file, header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+
+#beta against -log10 p-values per 10 SNP window (non-overlapping)
+p <- ggplot(gwas, aes(beta_max, -log10(LRT.pval_median))) + geom_bin2d(bins=100) +
+ylab("-log10(p)") + xlab("Max SNP effect size per 10-SNP window") +
+theme_classic()
+p
+
+#Histogam of effect size values
+hist(gwas$beta_max, freq=FALSE, xlab = "Max effect size per 10-SNP window") 
+lines(density(gwas$beta_max), lwd = 2, col = 'red')
+```
+![rytW4182A](https://github.com/user-attachments/assets/71c4822d-7ff7-43dc-ae62-ae1f6bf33445)
+
+![B1XJNAB3R](https://github.com/user-attachments/assets/5eef2246-9a46-4359-bbf8-8d14dbaf08db)
+
+Everything looks good, so we can proceed to making manhattan plots. 
 
 ### Plot the candidates in Manhattan plot
 
@@ -307,6 +367,76 @@ ggsave("manhattan_with_candidates_above06.pdf", plot = p, width = 7, height = 4)
 manhattan(dxy.tmp, chr ="scaff", bp = "BPcum", p = "LRT.pval_median", snp = "SNP", highlight = candidates,
           col = c("blue4", "orange3"), main = "Manhattan Plot", xlab = "scaffold")
           
+```
+
+## Candidate genes
+
+```R
+
+##### Elisa 2024 Modified from https://onlinelibrary.wiley.com/doi/10.1111/mec.16067 #####
+#### packages ####
+rm(list=ls())
+dev.off()
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(qqman)
+library(cowplot)
+library(data.table)
+library(stringr)
+library(devtools)
+library(ggman)
+options(scipen = 999)
+library(RcppCNPy)
+library(GenomicRanges)
+library(GenomicFeatures)
+library(topGO)
+
+############################## 0. data prep #########################
+# use 10 snp no overlaps to look at densities
+era.shape.gwas <- read.table("outliers_rank_1_2.txt", header = T)
+
+# references available at LepBase
+ref.scaff.era <- read.table("./Herato_final_corrected.fa.fai", row.names = NULL)
+
+############################## 1. get outlier ranges #########################
+######## 1. era, prep outlier blocks ranges  ########
+#### keep only outlier ranges with more than 10 outlier windows - i.e. clusters #####
+
+# make granges, keep metadata, xxx blocks
+head(era.shape.gwas)
+era.all.summ.ranges <-  makeGRangesFromDataFrame(era.shape.gwas, keep.extra.columns = T, 
+                                                 start.field="Position_min",end.field=c("Position_max"),
+                         seqnames.field=c("scaff"),
+                         ignore.strand =T)
+
+
+############################## 2. extract genes (all and outlier) #########################
+########### 2.1 prep gff ranges, extract ALL genes  ########
+## get genes from gff with genomic ranges
+# create txdb from gff https://www.biostars.org/p/167818/
+txdb.era <- makeTxDbFromGFF("1.data/gene.set.anno/Heliconius_erato_demophoon_v1.gff3" , format="gff3")
+
+# checks
+exonsBy(txdb.era, by="gene")
+mcols(GenomicFeatures::cds(txdb.era, columns=c("TXID", "TXNAME", "GENEID"))); GenomicFeatures::transcripts(txdb.era)
+nrow(mcols(GenomicFeatures::genes(txdb.era, columns=c("TXID", "TXNAME", "GENEID")))) # total 13676 genes
+
+# obtain gene lengths for all genes of each species, called "width"
+era.gene.lengths <-as.data.frame(GenomicFeatures::transcripts(txdb.era))
+
+########### 2.2 erato outlier genes   ########
+length(GenomicFeatures::genes(txdb.era)) 
+
+# use txname to overlap with ranges, as this has model instead of TU
+overlap.genes.era <- subsetByOverlaps( GenomicFeatures::genes(txdb.era, columns=c("TXNAME")), era.all.summ.ranges, type="any")
+head(as.data.frame(overlap.genes.era)); str(as.data.frame(overlap.genes.era$TXNAME))
+
+# use values (as these will match real names) 
+genes.era <-  as.data.frame(overlap.genes.era$TXNAME)$value; length(genes.era); length(unique(genes.era))  
+#1081 genes, 624 unique genes 
+
 ```
 
 
