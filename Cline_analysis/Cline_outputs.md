@@ -1,14 +1,4 @@
----
-title: 'Cline_outputs'
-disqus: hackmd
----
 # Cline analysis outputs
-
-## Table of Contents
-
-[TOC]
-
-
 
 We want to model the residuals for corneal area (CA) and facet count (FC) by transect position. 
 
@@ -32,6 +22,7 @@ modelIV  -1201.892
 modelV   -1197.488
 ```
 Plotted together:
+<img src="https://hackmd.io/_uploads/H1mN9JmDR.png" alt="image" />
 ![image](https://hackmd.io/_uploads/H1mN9JmDR.png)
 
 >model I variation of parameters
