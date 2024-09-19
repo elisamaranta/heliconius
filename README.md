@@ -16,3 +16,11 @@ Supplementary methods for the EES Master Thesis _Investigating visual divergence
 │   └── Get_gene_annotation.R         # Get gene IDs for top SNP windows. 
     └── ...
 
+  .
+    ├── build                   # Compiled files (alternatively `dist`)
+    ├── docs                    # Documentation files (alternatively `doc`)
+    ├── src                     # Source files (alternatively `lib` or `app`)
+    ├── test                    # Automated tests (alternatively `spec` or `tests`)
+    ├── tools                   # Tools and utilities
+    ├── LICENSE
+    └── README.md
