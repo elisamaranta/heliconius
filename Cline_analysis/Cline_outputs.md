@@ -22,7 +22,6 @@ modelIV  -1201.892
 modelV   -1197.488
 ```
 Plotted together:
-<img src="https://hackmd.io/_uploads/H1mN9JmDR.png" alt="image" />
 ![H1mN9JmDR](https://github.com/user-attachments/assets/d5907d12-8ab9-4fec-b8a7-dc130930839f)
 
 >model I variation of parameters
@@ -79,7 +78,7 @@ attr(,"class")
 ```
 
 Best model:
-![image](https://hackmd.io/_uploads/HkVB31QPA.png)
+![HkVB31QPA](https://github.com/user-attachments/assets/294d6b20-fb56-486e-aa37-bcf98ff7ecf2)
 
 ## Corneal area clines
 >**log(corneal area) ~ log(Abdomen length) + sex residuals**
@@ -92,7 +91,7 @@ modelIV  -973.2720
 modelV   -969.3587
 ```
 Plotted all together:
-![image](https://hackmd.io/_uploads/Hk2WWWmwR.png)
+![Hk2WWWmwR](https://github.com/user-attachments/assets/193d4ac8-7e69-4881-8a10-79b06cca1a77)
 
 
 Best model is model I. Here is the summary:
@@ -147,18 +146,18 @@ $isValid
 attr(,"class")
 [1] "hzar.cline"
 ```
-...and plot:
-![image](https://hackmd.io/_uploads/Bks6l-XPR.png)
+...and plotted:
+![Bks6l-XPR](https://github.com/user-attachments/assets/dd338cf3-71b3-432f-b8bb-397e07e989a5)
 
 
 Now, facet count (red) and corneal area (black) clines overlapping to visualise better:
 
-![image](https://hackmd.io/_uploads/r1NTpQmD0.png)
+![r1NTpQmD0](https://github.com/user-attachments/assets/e599c114-59e0-4fec-9200-a9129046ada4)
+
 
 Here is the WntA phenotype cline for comparison:
 
-![image](https://hackmd.io/_uploads/rJ8Rh7XPA.png)
-
+![rJ8Rh7XPA](https://github.com/user-attachments/assets/6a05e365-9129-47ab-85cc-737570c99cf9)
 
 ## Clines using tibia residuals
 **Now we are look at tibia residuals instead of abdomen length residuals:**
@@ -175,7 +174,8 @@ modelIV  -1021.550
 modelV   -1035.428
 
 ```
-![image](https://hackmd.io/_uploads/Hk3KRXrwC.png)
+![Hk3KRXrwC](https://github.com/user-attachments/assets/877d35bd-10d9-4361-b3de-c90b5fb5d3b7)
+
 
 The best model is model II:
 ```R 
@@ -245,7 +245,7 @@ attr(,"class")
 
 ```
 Here is model II fit:
-![image](https://hackmd.io/_uploads/SyVyRQSvA.png)
+![SyVyRQSvA](https://github.com/user-attachments/assets/6f34d4fe-93de-438e-8b1b-1e2c2309c188)
 
 **Now repeat with corneal area:**
 
@@ -256,7 +256,7 @@ modelIII -871.6335
 modelIV  -873.6386
 modelV   -867.5695
 ```
-![image](https://hackmd.io/_uploads/BkjaXBrPR.png)
+![BkjaXBrPR](https://github.com/user-attachments/assets/b87d9cf3-fc83-40c4-947b-d848bcffffcf)
 
 
 Model I is the best fit cline:
@@ -316,13 +316,12 @@ attr(,"class")
 [1] "hzar.cline"
 ```
 And plotted here: 
-![image](https://hackmd.io/_uploads/ryaKoBSwR.png)
+![ryaKoBSwR](https://github.com/user-attachments/assets/cf372273-33f7-4f81-9301-4c86421668dc)
 
 
 Now together...
 
-![image](https://hackmd.io/_uploads/rJr_iHBD0.png)
-
+![rJr_iHBD0](https://github.com/user-attachments/assets/895b3131-aa8e-4375-b73e-46e1ae73ad28)
 
 ## Wing aspect ratio clines
 
@@ -330,7 +329,7 @@ I also tested the cline of wing aspect ratio to assess how it compared to eye si
 
 This plot shows wing aspect ratio along sites:
 
-![image](https://hackmd.io/_uploads/SyWLdR1tA.png)
+![SyWLdR1tA](https://github.com/user-attachments/assets/fb1648f0-4ba6-432f-8ada-d0bf4203411d)
 
 ```R
               AICc
@@ -342,7 +341,7 @@ modelV   -836.4745
 ```
 
 All models overlapping:
-![image](https://hackmd.io/_uploads/Hyup04eYA.png)
+![Hyup04eYA](https://github.com/user-attachments/assets/81a9a77d-2d26-4e6d-8b53-4c42078c1e44)
 
 Best model fit is model I:
 
@@ -394,8 +393,8 @@ $isValid
 attr(,"class")
 [1] "hzar.cline"
 ```
+![rynPkHxt0](https://github.com/user-attachments/assets/ab4dada8-5e98-4dd0-a970-00ed447eec35)
 
-![image](https://hackmd.io/_uploads/rynPkHxt0.png)
 Not a good fit and no clear cline from the wing shape aspect ratio values. 
 
 
