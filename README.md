@@ -1,8 +1,9 @@
 # Heliconius
 
 Supplementary methods for the EES Master Thesis _Investigating visual divergence and its genetic basis across a tropical butterfly hybrid zone_
-`
+
 .
+├── ...
 ├── Eye_size_analysis
 │   ├── Eye_Size.R                   
 │   ├── Get_elevation_values.R        # Getting altitude values for all individuals.
@@ -13,5 +14,5 @@ Supplementary methods for the EES Master Thesis _Investigating visual divergence
 ├── GWAS                              
 │   ├── Running_GWAS.md               # Instructions on running GWAS, following Meier et al. 2021.
 │   └── Get_gene_annotation.R         # Get gene IDs for top SNP windows. 
-.
-`
+    └── ...
+
