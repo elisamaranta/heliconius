@@ -23,7 +23,7 @@ modelV   -1197.488
 ```
 Plotted together:
 <img src="https://hackmd.io/_uploads/H1mN9JmDR.png" alt="image" />
-![image](https://hackmd.io/_uploads/H1mN9JmDR.png)
+![H1mN9JmDR](https://github.com/user-attachments/assets/d5907d12-8ab9-4fec-b8a7-dc130930839f)
 
 >model I variation of parameters
 ```R=
