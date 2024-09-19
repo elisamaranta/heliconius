@@ -28,7 +28,7 @@ bcftools query -f '%CHROM\n' erato_filtered.recode.vcf.gz | sort | uniq
 
 ## 1. NGSadmix
 
-Already done. Obtain admixture proportions to control for population structure in the GWAS. Install NGSadmix from [here](http://www.popgen.dk/software/index.php/NgsAdmix), 
+Already done by Montejo-Kovacevich et al. (2021). Obtain admixture proportions to control for population structure in the GWAS. Install NGSadmix from [here](http://www.popgen.dk/software/index.php/NgsAdmix), 
 
 ```bash
 module load htslib/1.2.1 bcftools-1.9-gcc-5.4.0-b2hdt5n samtools/1.3.1 vcftools
